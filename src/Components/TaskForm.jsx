@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { addTask } from "../redux/taskSlice";
 
 const TaskForm = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const [task, setTask] = useState({
     title: "",
@@ -11,7 +11,6 @@ const TaskForm = () => {
     priority: "High",
     status: "incomplete",
   });
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,13 +22,17 @@ const TaskForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let payload = {...task, id: Date.now(), creationDate: new Date().toISOString()};
+    let payload = {
+      ...task,
+      id: Date.now(),
+      creationDate: new Date().toISOString(),
+    };
     dispatch(addTask(payload));
     setTask({
       title: "",
       detail: "",
       priority: "High",
-      status: "Incomplete",
+      status: "incomplete",
     });
   };
 

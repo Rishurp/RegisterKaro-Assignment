@@ -1,9 +1,14 @@
-
+import { useLocation } from "react-router-dom";
 
 const TaskDetails = () => {
+  const location = useLocation();
+  const { task } = location.state;
   return (
-    <div>TaskDetails</div>
-  )
-}
+    <>
+      <h1>Task Details</h1>
+      <div>{task.detail}</div>
+    </>
+  );
+};
 
-export default TaskDetails
+export default TaskDetails;

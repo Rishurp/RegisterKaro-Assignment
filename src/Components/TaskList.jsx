@@ -9,12 +9,13 @@ const TaskList = () => {
   const dispatch = useDispatch();
   const taskList = useSelector((state) => state.taskData);
   const [isTaskUpdating, setTaskUpdate] = useState(false);
+  const [currentTask, setCurrentTask] = useState(null);
   const [filter, setFilter] = useState("all");
   const [sort, setSort] = useState("date");
   const navigate = useNavigate();
 
   const handleCheckboxChange = (id, status) => {
-    const newStatus = status === "completed" ? "incomplete" : "completed";
+    const newStatus = status === "completed" ? "Incomplete" : "completed";
     dispatch(updateStatus({ id, status: newStatus }));
   };
 
@@ -22,21 +23,23 @@ const TaskList = () => {
     dispatch(deleteTask(id));
   };
 
-  const handleUpdate = () => {
+  const handleUpdate = (task) => {
+    setCurrentTask(task);
     setTaskUpdate(true);
   };
 
   const handleSave = (updatedTask) => {
     dispatch(updateTask(updatedTask));
     setTaskUpdate(false);
+    setCurrentTask(null);
   };
 
   const handleClose = () => {
     setTaskUpdate(false);
+    setCurrentTask(null);
   };
 
   const handleFilterChange = (status) => {
-    console.log(status)
     setFilter(status);
   };
 
@@ -45,9 +48,7 @@ const TaskList = () => {
   };
 
   const filteredTasks = taskList.filter((task) => {
-    console.log(task.status)
     if (filter === "all") return true;
-
     return task.status === filter;
   });
 
@@ -62,36 +63,62 @@ const TaskList = () => {
   });
 
   return (
-    <div>
+    <div className="max-w-4xl mx-auto p-6">
       <TaskFilterSort
         onFilterChange={handleFilterChange}
         onSortChange={handleSortChange}
       />
-      {sortedTasks.map((task) => (
-        <div key={task.id} className="border border-gray-200 p-4 my-2">
-          <h2 className="text-lg font-semibold">{task.title}</h2>
-          <button onClick={() => navigate("/details", { state: { task } })}>
-            Get Task Details
-          </button>
-          <p className="text-sm">Priority: {task.priority}</p>
-          <p className="text-sm">Status: {task.status}</p>
-          <button onClick={() => handleUpdate(task)}>
-            {isTaskUpdating ? "cancel" : "update"}
-          </button>
-          <button onClick={() => handleDelete(task.id)}>delete</button>
-          <label>
-            <input
-              type="checkbox"
-              checked={task.status === "completed"}
-              onChange={() => handleCheckboxChange(task.id, task.status)}
-            />
-            Mark as completed
-          </label>
-          {isTaskUpdating && (
-            <TaskModal task={task} onClose={handleClose} onSave={handleSave} />
-          )}
-        </div>
-      ))}
+      <div className="mt-6 space-y-4">
+        {sortedTasks.map((task) => (
+          <div
+            key={task.id}
+            className="border border-gray-300 p-4 rounded-lg bg-white shadow-md"
+          >
+            <div className="flex justify-between items-center">
+              <h2 className="text-lg font-semibold truncate">{task.title}</h2>
+              <div className="flex space-x-2">
+                <button
+                  onClick={() => navigate("/details", { state: { task } })}
+                  className="text-[#1C4670] hover:underline"
+                >
+                  Get Details
+                </button>
+                <button
+                  onClick={() => handleUpdate(task)}
+                  className="text-yellow-500 hover:underline"
+                >
+                  Update
+                </button>
+                <button
+                  onClick={() => handleDelete(task.id)}
+                  className="text-red-500 hover:underline"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+            <div className="flex justify-between items-center mt-2">
+              <p className="text-sm">Priority: {task.priority}</p>
+              <label className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  checked={task.status === "completed"}
+                  onChange={() => handleCheckboxChange(task.id, task.status)}
+                  className="form-checkbox h-4 w-4 text-indigo-600"
+                />
+                <span className="text-sm">Mark as completed</span>
+              </label>
+            </div>
+            {isTaskUpdating && currentTask.id === task.id && (
+              <TaskModal
+                task={task}
+                onClose={handleClose}
+                onSave={handleSave}
+              />
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

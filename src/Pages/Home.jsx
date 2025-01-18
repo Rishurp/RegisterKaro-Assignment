@@ -1,35 +1,18 @@
 import TaskForm from "../Components/TaskForm";
 import TaskList from "../Components/TaskList";
-
-const taskArray = [
-  {
-    id: 1,
-    title: "Task 1",
-    detail: "Task 1 Detail",
-    priority: "High",
-    status:"Incomplete"
-  },
-  {
-    id: 2,
-    title: "Task 2",
-    detail: "Task 2 Detail",
-    priority: "Low",
-    status:"Incomplete"
-  },
-  {
-    id: 3,
-    title: "Task 3",
-    detail: "Task 3 Detail",
-    priority: "High",
-    status:"Incomplete"
-  }
-]
+import { useSelector } from "react-redux";
 
 const Home = () => {
+  const tasks = useSelector((state) => state.taskData);
+
   return (
     <div>
       <TaskForm />
-      <TaskList tasks = {taskArray} />
+      {tasks.length > 0 ? (
+        <TaskList />
+      ) : (
+        <p className="text-center text-gray-500">No tasks found</p>
+      )}
     </div>
   );
 };

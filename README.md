@@ -55,10 +55,18 @@ This is a task management application built with React, Redux, and Tailwind CSS.
 Here are some screenshots of the application:
 
 ### Home Page
-![Home Page](c:\Users\Rishu\Pictures\Screenshots\Screenshot 2025-01-18 160252.png)
+![Home Page](https://github.com/user-attachments/assets/b63edbd8-9901-4b88-ae6c-b7a2e45ba5e2)
+)
 
-![Detail Page](c:\Users\Rishu\Pictures\Screenshots\Screenshot 2025-01-18 160401.png)
+![Detail Page](https://github.com/user-attachments/assets/57913b9d-dbf3-4dda-b33e-158815c6b007)
+)
 
+
+Here is the performance report generated using Google PageSpeed Insights:
+
+![PageSpeed Insights](https://github.com/user-attachments/assets/32545955-88a4-4039-a17b-be908c9652a9)
+
+Here is the link to the Google PageSpeed Insights report: https://pagespeed.web.dev/analysis/https-task-management-app-rishurp-vercel-app/ifmknoaicw?form_factor=mobile
 ---
 
 ## Approach and Thought Process

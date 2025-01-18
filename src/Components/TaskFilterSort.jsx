@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const TaskFilterSort = ({ onFilterChange, onSortChange }) => {
   const handleFilterChange = (e) => {
     onFilterChange(e.target.value);
@@ -36,6 +38,11 @@ const TaskFilterSort = ({ onFilterChange, onSortChange }) => {
       </div>
     </div>
   );
+};
+
+TaskFilterSort.propTypes = {
+  onFilterChange: PropTypes.func.isRequired,
+  onSortChange: PropTypes.func.isRequired,
 };
 
 export default TaskFilterSort;

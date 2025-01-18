@@ -5,15 +5,21 @@ const TaskDetails = () => {
   const { task } = location.state;
 
   return (
-    <div className="max-w-4xl mx-auto p-8 bg-white rounded-lg shadow-lg border border-gray-200">
-      <h1 className="text-3xl text-center font-bold mb-6 text-primary">Task Details</h1>
+    <div className="max-w-4xl mt-5 mx-auto p-8 bg-white rounded-lg shadow-lg border border-gray-200">
+      <h1 className="text-3xl text-center font-bold mb-6 text-primary">
+        Task Details
+      </h1>
       <div className="mb-6">
         <h2 className="text-lg font-semibold text-gray-800 mb-2">Title</h2>
-        <p className="text-gray-600 bg-gray-100 p-4 rounded-md shadow-sm">{task.title}</p>
+        <p className="text-gray-600 bg-gray-100 p-4 rounded-md shadow-sm">
+          {task.title}
+        </p>
       </div>
       <div className="mb-6">
         <h2 className="text-lg font-semibold text-gray-800 mb-2">Detail</h2>
-        <p className="text-gray-600 bg-gray-100 p-4 rounded-md shadow-sm">{task.detail}</p>
+        <p className="text-gray-600 bg-gray-100 p-4 rounded-md shadow-sm">
+          {task.detail}
+        </p>
       </div>
       <div className="mb-6">
         <h2 className="text-lg font-semibold text-gray-800 mb-2">Priority</h2>

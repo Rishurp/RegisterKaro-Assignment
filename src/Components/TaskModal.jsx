@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
 const TaskUpdateModal = ({ task, onClose, onSave }) => {
   const [updatedTask, setUpdatedTask] = useState(task);
@@ -25,13 +26,21 @@ const TaskUpdateModal = ({ task, onClose, onSave }) => {
       <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold">Update Task</h2>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
+          <button
+            onClick={onClose}
+            className="text-gray-500 hover:text-gray-700"
+          >
             &times;
           </button>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title</label>
+            <label
+              htmlFor="title"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Title
+            </label>
             <input
               type="text"
               id="title"
@@ -43,7 +52,12 @@ const TaskUpdateModal = ({ task, onClose, onSave }) => {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="detail" className="block text-sm font-medium text-gray-700">Detail</label>
+            <label
+              htmlFor="detail"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Detail
+            </label>
             <textarea
               id="detail"
               name="detail"
@@ -54,7 +68,12 @@ const TaskUpdateModal = ({ task, onClose, onSave }) => {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="priority" className="block text-sm font-medium text-gray-700">Priority</label>
+            <label
+              htmlFor="priority"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Priority
+            </label>
             <select
               id="priority"
               name="priority"
@@ -79,6 +98,16 @@ const TaskUpdateModal = ({ task, onClose, onSave }) => {
       </div>
     </div>
   );
+};
+
+TaskUpdateModal.propTypes = {
+  task: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    detail: PropTypes.string.isRequired,
+    priority: PropTypes.string.isRequired,
+  }).isRequired,
+  onClose: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
 };
 
 export default TaskUpdateModal;
